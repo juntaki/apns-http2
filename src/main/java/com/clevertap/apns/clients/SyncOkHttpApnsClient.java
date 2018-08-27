@@ -288,7 +288,7 @@ public class SyncOkHttpApnsClient implements ApnsClient {
             // Generate a new JWT token if it's null, or older than 55 minutes
             if (cachedJWTToken == null || System.currentTimeMillis() / 1000 - lastJWTTokenTS > 55 * 60) {
                 try {
-                    lastJWTTokenTS = System.currentTimeMillis() / 1000 / 1800 * 1800;
+                    lastJWTTokenTS = System.currentTimeMillis() / 1000 / (55 * 60) * (55 * 60);
                     cachedJWTToken = JWT.getToken(teamID, keyID, apnsAuthKey);
                 } catch (InvalidKeySpecException | NoSuchAlgorithmException | SignatureException | InvalidKeyException e) {
                     return null;
